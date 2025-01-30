@@ -16,8 +16,29 @@ the function below should be the only one in this file.
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
-  /* Add code here */
 // WRITE YOUR CODE HERE
-}
+//call next pointer of main array
+//create temp Node without the first value
+//determine if it is odd or even
+//add onto either odd or evens
+//recurse onto temp node in main array
+  if (in == nullptr)
+  {
+    return;
+  }
+  Node* nextNode = in -> next;
 
-/* If you needed a helper function, write it here */
+  if (in -> value % 2 == 0) //even
+  {
+    in -> next = evens; // add onto evens
+    evens = in; 
+    split(nextNode, odds, evens -> next);
+  }
+  else
+  {
+    in -> next = odds;
+    odds = in;
+    split(nextNode, odds -> next, evens);
+  }
+  in = nullptr;
+}
